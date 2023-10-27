@@ -3,30 +3,32 @@ session_start();
 // Include database connection file
 include_once('database.php');
 if (!isset($_SESSION['ROLE'])) {
-    header("Location:login.php");
-    exit();
+  header("Location:login.php");
+  exit();
 }
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <link rel="stylesheet" href="style1.css">
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin Panel</title>
+  <title>Admin Panel</title>
 </head>
+
 <body>
-<div class="sidebar">
+  <div class="sidebar">
     <div class="logo-details">
 
       <span class="logo_name" style="margin-left:4px">DEEKSHA</span>
     </div>
     <ul class="nav-links">
-	<li>
+      <li>
         <a href="admin.php" class="active">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Admin Dasboard</span>
@@ -39,13 +41,13 @@ if (!isset($_SESSION['ROLE'])) {
         </a>
       </li>
       <li>
-        <a href="allotment.php" >
+        <a href="allotment.php">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Allotment</span>
         </a>
       </li>
-     
-     
+
+
       <li>
         <a href="search-vehicle.php">
           <i class='bx bx-search'></i>
@@ -69,56 +71,54 @@ if (!isset($_SESSION['ROLE'])) {
     </nav>
 
     <div class="home-content"></div>
-<div>
-	<h2>Graph Of Task Complited by faculty</h2>
-</div>
-<div>
-	<h2>graph of Task Panding by Faculty</h2>
-</div>
-<div>
-	<h2>Total College Covered</h2>
-</div>
-<div>
-	college Panding
-</div>
-<div>
-	total data Colleted
-<div>
-	Up
-</div>
-<div>
-	CBSE
-</div>
-<div>
-	ICSE
-</div>
-</div>
-<div>
-	<h2>Deprtment wise School students Segregation</h2>
-</div>
-<div>Year Wise School Student Segregation</div>
-<div>
-	time Series Analysi
-</div>
+    <div>
+      <h2>Graph Of Task Complited by faculty</h2>
+    </div>
+    <div>
+      <h2>graph of Task Panding by Faculty</h2>
+    </div>
+    <div>
+      <h2>Total College Covered</h2>
+    </div>
+    <div>
+      college Panding
+    </div>
+    <div>
+      total data Colleted
+      <div>
+        Up
+      </div>
+      <div>
+        CBSE
+      </div>
+      <div>
+        ICSE
+      </div>
+    </div>
+    <div>
+      <h2>Deprtment wise School students Segregation</h2>
+    </div>
+    <div>Year Wise School Student Segregation</div>
+    <div>
+      time Series Analysi
+    </div>
 
-<div>
-	<a href="allotment.php"><button>Allotment</button></a>
-</div>
-<a class="nav-link" href="logout.php"><?php echo ucwords($_SESSION['USERNAME']); ?></a>
+    <a class="nav-link" href="logout.php"><?php echo ucwords($_SESSION['USERNAME']); ?></a>
 
-</div>
+    </div>
 
-</section>
-<script>
-  let sidebar = document.querySelector(".sidebar");
-  let sidebarBtn = document.querySelector(".sidebarBtn");
-  sidebarBtn.onclick = function() {
-	sidebar.classList.toggle("active");
-	if (sidebar.classList.contains("active")) {
-	  sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-	} else
-	  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-  }
-</script>
+  </section>
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".sidebarBtn");
+    sidebarBtn.onclick = function() {
+      sidebar.classList.toggle("active");
+      if (sidebar.classList.contains("active")) {
+        sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+      } else
+        sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+  </script>
 </body>
+
 </html>

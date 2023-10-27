@@ -49,6 +49,24 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
+<style>
+  body {
+    background-image: url("./bgimg.jpg");
+    background-size: cover;
+    
+  }
+
+  .form-design {
+    background-color: #fff;
+    opacity: .8;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    
+    text-shadow: 0 0 3px #FF0000;
+    
+  }
+</style>
 
 <body>
   <div class="card text-center" style="padding:20px;">
@@ -64,10 +82,10 @@ if (isset($_POST['submit'])) {
             <?php echo $errorMsg; ?>
           </div>
         <?php } ?>
-        <form action="" method="POST">
+        <form class="form-design" action="" method="POST">
           <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" class="form-control" name="username" placeholder="Enter Username">
+            <input type="email" class="form-control" name="username" placeholder="Enter Username">
           </div>
           <div class="form-group">
             <label for="password">Password:</label>
