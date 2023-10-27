@@ -1,95 +1,69 @@
 <?php
 session_start();
-if (isset($_SESSION['ID'])) {
-  header("Location:faculty_panel.php");
-  exit();
-}
-// Include database connectivity
+$errorMessage = '';
 
-include_once('database.php');
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Handle form submission
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
 
-if (isset($_POST['submit'])) {
-  $errorMsg = "";
-  $username = $con->real_escape_string($_POST['username']);
-  $password = $con->real_escape_string($_POST['password']);
+    // Establish a database connection (you should replace these with your actual database credentials)
+    $db_host = 'localhost';
+    $db_user = 'root';
+    $db_pass = '';
+    $db_name = 'erps';
 
-  if (!empty($username) || !empty($password)) {
-    $query  = "SELECT * FROM admins WHERE username = '$username'";
-    $result = $con->query($query);
-    if ($result->num_rows > 0) {
-      $row = $result->fetch_assoc();
-      $_SESSION['ID'] = $row['id'];
-      $_SESSION['ROLE'] = $row['role'];
-      $_SESSION['USERNAME'] = $row['username'];
-      if ($_SESSION['ROLE'] == 'Admin') {
-        header('location:admin.php');
-        die();
-      } else {
-        header("Location:faculty_panel.php");
-        die();
-      }
-    } else {
-      $errorMsg = "No user found on this username";
+    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
-  } else {
-    $errorMsg = "Username and Password is required";
-  }
+
+    // Securely hash the password (you should use a better hashing algorithm in a production environment)
+    
+
+    // Prepare and execute a query
+    $stmt = $conn->prepare("SELECT username, role FROM users WHERE username = ? AND password = ? AND role = ?");
+    $stmt->bind_param("sss", $username, $password, $role);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($dbUsername, $dbRole);
+    $stmt->fetch();
+
+    if ($stmt->num_rows > 0) {
+        // Successful login
+        $_SESSION['username'] = $username;
+        $_SESSION['role'] = $dbRole;
+		 if ($dbRole === 'admin') {
+            header("Location: admin.php");
+        } elseif ($dbRole === 'user') {
+            header("Location: faculty_panel.php");
+        }
+    } else {
+        // Invalid credentials
+        $errorMessage = "Invalid username, password, or role.";
+    }
+
+    $stmt->close();
+    $conn->close();
 }
-
-
-
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <title>Deeksha Workshop login</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>Login Page</title>
 </head>
-
 <body>
-  <div class="card text-center" style="padding:20px;">
-    <h3>Deeksha Workshop login</h3>
-  </div><br>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <?php if (isset($errorMsg)) { ?>
-          <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo $errorMsg; ?>
-          </div>
-        <?php } ?>
-        <form action="" method="POST">
-          <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" name="username" placeholder="Enter Username">
-          </div>
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" name="password" placeholder="Enter Password">
-          </div>
-          <div style="display: flex; justify-content:center; gap:5px;">
-            <div>
-              <label for="Admin">Admin</label>
-              <input type="radio" name="auth">
-            </div>
-            <div>
-              <label for="Faculty">Faculty</label>
-              <input type="radio" name="auth">
-            </div>
-          </div>
-          <div class="form-group">
-            <input type="submit" name="submit" class="btn btn-success" value="Login">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+    <h2>Login</h2>
+    <form method="POST" action="">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <input type="radio" name="role" value="admin" checked> Admin
+        <input type="radio" name="role" value="user"> User<br>
+        <input type="submit" value="Login">
+        <p style="color: red;"><?php echo $errorMessage; ?></p>
+    </form>
 </body>
-
 </html>
