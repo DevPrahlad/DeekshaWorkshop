@@ -1,74 +1,74 @@
 <?php
-// Include database connection file
-include_once('database.php');
-if (isset($_POST['submit'])) {
+session_start();
 
-  $username = $con->real_escape_string($_POST['username']);
-  $password = $con->real_escape_string($_POST['password']);
+if (isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
 
-  $role     = $con->real_escape_string($_POST['role']);
-  $query  = "INSERT INTO admins (username,password,role) VALUES ('$username','$password','$role')";
-  $result = $con->query($query);
-  if ($result == true) {
-    header("Location:login.php");
-    die();
-  } else {
-    $errorMsg  = "You are not Registred..Please Try again";
-  }
+$errorMessage = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+
+    // Validate and sanitize user inputs
+    $username = filter_var($username, FILTER_SANITIZE_STRING);
+    $password = filter_var($password, FILTER_SANITIZE_STRING);
+
+    // Check if the username is already taken (you should implement this)
+    $isUsernameTaken = false; // Replace with actual logic to check if the username exists in your database
+
+    if ($isUsernameTaken) {
+        $errorMessage = "Username already taken. Please choose another.";
+    } else {
+        // Hash the password securely (use a better hashing algorithm in production)
+        $hashedPassword = md5($password);
+
+        // Store the registration data in the database (replace with your database connection logic)
+        $db_host = 'localhost';
+        $db_user = 'root';
+        $db_pass = '';
+        $db_name = 'erps';
+
+        $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $username, $hashedPassword, $role);
+
+        if ($stmt->execute()) {
+            $successMessage = "Registration successful. You can now log in.";
+        } else {
+            $errorMessage = "Registration failed. Please try again.";
+        }
+
+        $stmt->close();
+        $conn->close();
+    }
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <title>Multi user role based application login in php mysqli</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <title>Registration</title>
 </head>
-
 <body>
-  <div class="card text-center" style="padding:20px;">
-    <h3>Multi user role based application login in php mysqli</h3>
-  </div><br>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <?php if (isset($errorMsg)) { ?>
-          <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php echo $errorMsg; ?>
-          </div>
-        <?php } ?>
-        <form action="" method="POST">
-
-          <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" name="username" placeholder="Enter Username" required="">
-          </div>
-          <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" name="password" placeholder="Enter Password" required="">
-          </div>
-          <div class="form-group">
-            <label for="role">Role:</label>
-            <select class="form-control" name="role" required="">
-              <option value="">Select Role</option>
-              <option value="Admin">Admin</option>
-              <option value="Faculty">Faculty</option>
-
-            </select>
-          </div>
-          <div class="form-group">
-            <p>Already have account ?<a href="login.php"> Login</a></p>
-            <input type="submit" name="submit" class="btn btn-primary">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+    <h2>Registration</h2>
+    <form method="POST" action="">
+        <input type="text" name="username" placeholder="Username" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <input type="radio" name="role" value="admin" checked> Admin
+        <input type="radio" name="role" value="user"> User<br>
+        <input type="submit" value="Register">
+        <p style="color: red;"><?php echo $errorMessage; ?></p>
+        <p style="color: green;"><?php echo $successMessage; ?></p>
+    </form>
+    <p>Already have an account? <a href="index.php">Login</a></p>
 </body>
-
 </html>
