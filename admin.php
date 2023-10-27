@@ -33,7 +33,7 @@ if (!isset($_SESSION['ROLE'])) {
         </a>
       </li>
       <li>
-        <a href="adfinish.php">
+        <a href="admin_data_report.php">
           <i class='bx bx-book-alt'></i>
           <span class="links_name">Data Report</span>
         </a>
