@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
       $_SESSION['ROLE'] = $row['role'];
       $_SESSION['NAME'] = $row['name'];
       if ($_SESSION['ROLE'] == 'Admin') {
-        header('location:faculty_panel.php');
+        header('location:admin.php');
         die();
       } else {
         header("Location:faculty_panel.php");

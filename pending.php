@@ -72,29 +72,23 @@
     </div>
     <ul class="nav-links">
 
-      <li>
-        <a href="finish.php">
+    <li>
+        <a href="usfinish.php">
           <i class='bx bx-book-alt'></i>
           <span class="links_name">Data Report</span>
         </a>
       </li>
       <li>
-        <a href="allotment.php">
+        <a href="pending.php" class="active">
           <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Allotment</span>
+          <span class="links_name">Pending Tasks</span>
         </a>
       </li>
 
       <li>
-        <a href="faculty_panel.php">
+        <a href="faculty_panel.php" ></a>
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Faculty Panel</span>
-        </a>
-      </li>
-      <li>
-        <a href="padding.php" class="active">
-          <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Pending Tasks</span>
         </a>
       </li>
       <li>
