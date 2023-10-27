@@ -1,4 +1,4 @@
 
 <?php
-$con=mysqli_connect("localhost","root","","logs") or die("Query Not Run");
+$con = mysqli_connect("localhost", "root", "", "erps") or die("Query Not Run");
 ?>

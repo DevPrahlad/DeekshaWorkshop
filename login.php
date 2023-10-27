@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $db_host = 'localhost';
     $db_user = 'root';
     $db_pass = '';
-    $db_name = 'logs';
+    $db_name = 'erps';
 
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Securely hash the password (you should use a better hashing algorithm in a production environment)
-    
+
 
     // Prepare and execute a query
     $stmt = $conn->prepare("SELECT username, role FROM users WHERE username = ? AND password = ? AND role = ?");
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Successful login
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $dbRole;
-		 if ($dbRole === 'admin') {
+        if ($dbRole === 'admin') {
             header("Location: admin.php");
         } elseif ($dbRole === 'user') {
             header("Location: faculty_panel.php");
@@ -52,9 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login Page</title>
 </head>
+
 <body>
     <h2>Login</h2>
     <form method="POST" action="">
@@ -66,4 +68,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p style="color: red;"><?php echo $errorMessage; ?></p>
     </form>
 </body>
+
 </html>
