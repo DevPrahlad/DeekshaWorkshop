@@ -71,28 +71,25 @@
       <span class="logo_name" style="margin-left:4px">DEEKSHA</span>
     </div>
     <ul class="nav-links">
-
-      <li>
-        <a href="faculty_panel.php">
+    <li>
+        <a href="admin.php" >
           <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Faculty Panel</span>
+          <span class="links_name">Admin Dasboard</span>
         </a>
       </li>
-
       <li>
-        <a href="usfinish.php" class="active">
+        <a href="admin_data_report.php" class="active">
           <i class='bx bx-book-alt'></i>
-          <span class="links_name">Finished Task</span>
+          <span class="links_name">Data Report</span>
         </a>
       </li>
       <li>
-        <a href="pending.php" class="active">
+        <a href="allotment.php" >
           <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Pending Tasks</span>
+          <span class="links_name">Allotment</span>
         </a>
       </li>
-
-
+     
       <li>
         <a href="search-vehicle.php">
           <i class='bx bx-search'></i>
