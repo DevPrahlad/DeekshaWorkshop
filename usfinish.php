@@ -71,11 +71,18 @@
       <span class="logo_name" style="margin-left:4px">DEEKSHA</span>
     </div>
     <ul class="nav-links">
-    
-    <li>
+
+      <li>
+        <a href="faculty_panel.php">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">Faculty Panel</span>
+        </a>
+      </li>
+
+      <li>
         <a href="usfinish.php" class="active">
           <i class='bx bx-book-alt'></i>
-          <span class="links_name">Data Report</span>
+          <span class="links_name">Finished Task</span>
         </a>
       </li>
       <li>
@@ -85,12 +92,7 @@
         </a>
       </li>
 
-      <li>
-        <a href="faculty_panel.php" ></a>
-          <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Faculty Panel</span>
-        </a>
-      </li>
+
       <li>
         <a href="search-vehicle.php">
           <i class='bx bx-search'></i>
