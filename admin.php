@@ -2,7 +2,7 @@
 session_start();
 // Include database connection file
 include_once('database.php');
-if (!isset($_SESSION['ROLE'])) {
+if (!isset($_SESSION['role'])) {
   header("Location:login.php");
   exit();
 }

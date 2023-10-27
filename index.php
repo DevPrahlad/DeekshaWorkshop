@@ -7,6 +7,7 @@ if (isset($_SESSION['username'])) {
 }
 
 $errorMessage = '';
+$successMessage = ''; // Initialize the $successMessage variable
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
@@ -24,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errorMessage = "Username already taken. Please choose another.";
     } else {
         // Hash the password securely (use a better hashing algorithm in production)
-        $hashedPassword = md5($password);
+        
 
         // Store the registration data in the database (replace with your database connection logic)
         $db_host = 'localhost';
         $db_user = 'root';
         $db_pass = '';
-        $db_name = 'erps';
+        $db_name = 'logs';
 
         $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
@@ -39,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $username, $hashedPassword, $role);
+        $stmt->bind_param("sss", $username, $password, $role);
 
         if ($stmt->execute()) {
             $successMessage = "Registration successful. You can now log in.";
