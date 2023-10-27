@@ -93,12 +93,7 @@
       </li>
 
 
-      <li>
-        <a href="search-vehicle.php">
-          <i class='bx bx-search'></i>
-          <span class="links_name">Search</span>
-        </a>
-      </li>
+      
       <li class="log_out">
         <a href="../login.php">
           <i class='bx bx-log-out bx-fade-left-hover'></i>
