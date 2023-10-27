@@ -104,7 +104,7 @@ if (!isset($_SESSION['ROLE'])) {
 <div>
 	<a href="allotment.php"><button>Allotment</button></a>
 </div>
-<a class="nav-link" href="logout.php"><?php echo ucwords($_SESSION['ROLE']); ?></a>
+<a class="nav-link" href="logout.php"><?php echo ucwords($_SESSION['USERNAME']); ?></a>
 
 </div>
 

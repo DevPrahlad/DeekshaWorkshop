@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
       $row = $result->fetch_assoc();
       $_SESSION['ID'] = $row['id'];
       $_SESSION['ROLE'] = $row['role'];
-      $_SESSION['NAME'] = $row['name'];
+      $_SESSION['USERNAME'] = $row['username'];
       if ($_SESSION['ROLE'] == 'Admin') {
         header('location:admin.php');
         die();
