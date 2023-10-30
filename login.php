@@ -1,5 +1,14 @@
 <?php
 session_start();
+error_reporting();
+  if (isset($_SESSION['role'])) {
+    if ($_SESSION['role'] === 'admin') {
+        header("Location: admin.php");
+    } elseif ($_SESSION['role'] === 'user') {
+        header("Location: faculty_panel.php");
+    }
+    exit();
+  }
 $errorMessage = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -24,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     // Prepare and execute a query
-    $stmt = $conn->prepare("SELECT username, role FROM users WHERE username = ? AND password = ? AND role = ?");
+    $stmt = $conn->prepare("SELECT username, role FROM usersss WHERE username = ? AND password = ? AND role = ?");
     $stmt->bind_param("sss", $username, $password, $role);
     $stmt->execute();
     $stmt->store_result();

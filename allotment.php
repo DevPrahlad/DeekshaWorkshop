@@ -115,6 +115,18 @@
     </nav>
 
     <div class="home-content">
+	 <?php
+        include 'database.php'; // Include the database connection
+
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            // Query to fetch a specific user's data
+            $sql = "SELECT * FROM usersss WHERE id = $id";
+            $result = $con->query($sql);
+
+            if ($result->num_rows == 1) {
+                $row = $result->fetch_assoc();
+        ?>
       <form>
         <div class="form-group">
           <label for="photo">Choose Faculty Photo:</label>
@@ -196,6 +208,16 @@
         <input type="submit" value="Submit" class="btn">
       </form>
 
+        <?php
+            } else {
+                echo "User not found.";
+            }
+        } else {
+            echo "Invalid user ID.";
+        }
+
+        $con->close();
+        ?>
     </div>
 
   </section>
