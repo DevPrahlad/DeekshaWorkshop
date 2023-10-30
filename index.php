@@ -63,26 +63,6 @@ body {
 .mx-t3{
   margin-top: -3rem;
 }
-.btn,
-.delete-btn{
-   width: 100%;
-   border-radius: 5px;
-   padding:10px 30px;
-   color:var(--white);
-   display: block;
-   text-align: center;
-   cursor: pointer;
-   font-size: 20px;
-   margin-top: 10px;
-}
-
-.btn{
-   background-color: var(--blue);
-}
-
-.btn:hover{
-   background-color: var(--dark-blue);
-}
 
       </style>
   </style>
