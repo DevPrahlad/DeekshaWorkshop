@@ -1,10 +1,9 @@
 <?php
 session_start();
-// Include database connection file
-include_once('database.php');
-if (!isset($_SESSION['role'])) {
-  header("Location:login.php");
-  exit();
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: index.php"); // Redirect to login page if not logged in or not an admin
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -41,7 +40,7 @@ if (!isset($_SESSION['role'])) {
         </a>
       </li>
       <li>
-        <a href="allotment.php">
+        <a href="regi_list.php">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Allotment</span>
         </a>
@@ -103,7 +102,7 @@ if (!isset($_SESSION['role'])) {
       time Series Analysi
     </div>
 
-    <a class="nav-link" href="logout.php"><?php echo ucwords($_SESSION['USERNAME']); ?></a>
+    <a class="nav-link" href="logout.php"><?php echo ucwords($_SESSION['username']); ?></a>
 
     </div>
 

@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+    header("Location: index.php"); // Redirect to login page if not logged in or not a user
+    exit();
+}
+?>
 <!DOCTYPE html>
 <!-- Website - www.codingnepalweb.com -->
 <html lang="en" dir="ltr">

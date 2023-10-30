@@ -1,10 +1,4 @@
 <?php
-session_start();
-
-if (isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit();
-}
 
 $errorMessage = '';
 $successMessage = ''; // Initialize the $successMessage variable
@@ -44,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             $successMessage = "Registration successful. You can now log in.";
+			header("location:login.php");
         } else {
             $errorMessage = "Registration failed. Please try again.";
         }
@@ -103,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p style="color: red;"><?php echo $errorMessage; ?></p>
                 <p style="color: green;"><?php echo $successMessage; ?></p>
             </form>
-            <p>Already have an account? <a href="index.php">Login</a></p>
+            <p>Already have an account? <a href="login.php">Login</a></p>
         </div>
     </div>
 
