@@ -51,23 +51,21 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    label {
-      font-weight: 600;
-      color: #666;
-    }
-
-    body {
-      background: #f1f1f1;
-      background: url(../images/bg-hero.png)no-repeat fixed 50%;
-    }
-
-    .box8 {
-      box-shadow: 0px 0px 5px 1px #999;
-    }
-
-    .mx-t3 {
-      margin-top: -3rem;
-    }
+  label {
+    font-weight: 600;
+    color: #666;
+}
+body {
+  background: #f1f1f1;
+  background:url(../images/bg-hero.png)no-repeat fixed 50%;
+}
+.box8{
+  box-shadow: 0px 0px 5px 1px #999;
+}
+.mx-t3{
+  margin-top: -3rem;
+}
+      </style>
   </style>
 
 </head>
