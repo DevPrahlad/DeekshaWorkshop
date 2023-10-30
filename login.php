@@ -55,18 +55,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
-    <h2>Login</h2>
-    <form method="POST" action="">
-        <input type="text" name="username" placeholder="Username" required><br>
-        <input type="password" name="password" placeholder="Password" required><br>
-        <input type="radio" name="role" value="admin" checked> Admin
-        <input type="radio" name="role" value="user"> User<br>
-        <input type="submit" value="Login">
-        <p style="color: red;"><?php echo $errorMessage; ?></p>
-    </form>
+    <div class="login-box">
+        <h2>Login</h2>
+        <form method="POST" action="">
+            <div class="user-box">
+                <input type="text" name="username" placeholder="" required>
+                <label>Email</label>
+            </div>
+
+            <div class="user-box">
+                <input type="password" name="password" placeholder="" required>
+                <label>Password</label>
+            </div>
+            <div class="radio-btn">
+                <div>
+                    <input type="radio" name="role" value="admin" checked> Admin
+                </div>
+                <div>
+                    <input type="radio" name="role" value="user"> User<br>
+                </div>
+            </div>
+
+            <div class="submit-btn">
+                <a href="#"><span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Submit<?php echo $errorMessage; ?></a>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

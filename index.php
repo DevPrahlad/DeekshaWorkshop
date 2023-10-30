@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <title>Registration</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         .main {
             display: flex;
@@ -67,7 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             height: 100vh;
             width: 100%;
         }
-        .form{
+
+        .form {
             border: 1px solid grey;
             height: 400px;
             width: 400px;
@@ -77,13 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             align-items: center;
         }
 
-        h2{
+        h2 {
             font-size: 50px;
             font-weight: 800;
+            margin-bottom: 30;
         }
-        .form-group{
-            
-        }
+
+        .form-group {}
     </style>
 </head>
 
@@ -96,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="radio" name="role" value="user"> User<br>
                 <input type="text" name="username" placeholder="Username" required><br>
                 <input type="password" name="password" placeholder="Password" required><br>
-                
+
                 <input type="submit" value="Register">
                 <p style="color: red;"><?php echo $errorMessage; ?></p>
                 <p style="color: green;"><?php echo $successMessage; ?></p>
