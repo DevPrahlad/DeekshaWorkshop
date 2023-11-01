@@ -1,4 +1,11 @@
+<?php
+session_start();
 
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+    header("Location: index.php"); // Redirect to login page if not logged in or not a user
+    exit();
+}
+?>
 <!DOCTYPE html>
 <!-- Website - www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
@@ -114,18 +121,7 @@
     </nav>
 
     <div class="home-content">
-<?php
-        include 'database.php'; // Include the database connection
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            // Query to fetch a specific user's data
-            $sql = "SELECT * FROM faculty_data WHERE id = $id";
-            $result = $con->query($sql);
-
-            if ($result->num_rows == 1) {
-                $row = $result->fetch_assoc();
-        ?>
       <form>
         <div class="form-group">
 
@@ -137,7 +133,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Faculty Name:</label>
-                <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" class="form-control">
+                <input type="text" id="name" name="name" class="form-control">
               </div>
             </div>
 
@@ -146,7 +142,11 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Department:</label>
-               <input type="text" id="department" name="department" value="<?php echo $row['target']; ?>"class="form-control">
+                <Select class="form-control">
+                  <option>---</option>
+                  <option>---</option>
+                  <option>---</option>
+                </select>
               </div>
             </div>
 
@@ -163,7 +163,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Target:</label>
-                <input type="text" id="target" name="target" value="<?php echo $id; ?>"class="form-control">
+                <input type="text" id="target" name="target" class="form-control">
               </div>
             </div>
           </div>
@@ -189,16 +189,7 @@
         </div>
 
       </form>
-<?php
-            } else {
-                echo "User not found.";
-            }
-        } else {
-            echo "Invalid user ID.";
-        }
 
-        $con->close();
-        ?>
     </div>
 
   </section>

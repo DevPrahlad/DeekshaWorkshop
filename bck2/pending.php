@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
-<!-- Website - www.codingnepalweb.com -->
-<html lang="en" dir="ltr">
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -22,18 +20,15 @@
       font-weight: 600;
       color: #333;
       margin: 15px;
-      align-items: center;
     }
-
-
 
     .head::before {
       content: "";
-      position: relative;
+      position: absolute;
       left: 0;
       bottom: -2px;
       height: 3px;
-      width: 50px;
+      width: 147px;
       border-radius: 8px;
       background-color: #4070f4;
     }
@@ -78,7 +73,7 @@
     <ul class="nav-links">
 
       <li>
-        <a href="faculty_panel.php" class="active">
+        <a href="faculty_panel.php">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Faculty Panel</span>
         </a>
@@ -91,14 +86,16 @@
         </a>
       </li>
       <li>
-        <a href="pending.php">
+        <a href="pending.php" class="active">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Pending Tasks</span>
         </a>
       </li>
 
+
+      
       <li class="log_out">
-        <a href="logout.php">
+        <a href="../login.php">
           <i class='bx bx-log-out bx-fade-left-hover'></i>
           <span class="links_name">Log out</span>
         </a>
@@ -109,50 +106,21 @@
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Faculty Panel</span>
+        <span class="dashboard">Pending Task</span>
       </div>
     </nav>
 
     <div class="home-content">
-<?php
-        include 'database.php'; // Include the database connection
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            // Query to fetch a specific user's data
-            $sql = "SELECT * FROM faculty_data WHERE id = $id";
-            $result = $con->query($sql);
 
-            if ($result->num_rows == 1) {
-                $row = $result->fetch_assoc();
-        ?>
+
       <form>
         <div class="form-group">
 
-          <div id="photo-preview"></div>
-
-
           <div class="row">
-
             <div class="col-md-3">
               <div class="form-group">
-                <label for="name">Faculty Name:</label>
-                <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" class="form-control">
-              </div>
-            </div>
-
-
-
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="name">Department:</label>
-               <input type="text" id="department" name="department" value="<?php echo $row['target']; ?>"class="form-control">
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="name">Alloted Schools:</label>
+                <label for="name">Remarks:</label>
                 <Select class="form-control">
                   <option>---</option>
                   <option>---</option>
@@ -160,45 +128,30 @@
                 </select>
               </div>
             </div>
+
+
             <div class="col-md-3">
               <div class="form-group">
-                <label for="name">Target:</label>
-                <input type="text" id="target" name="target" value="<?php echo $id; ?>"class="form-control">
+                <label for="name">Next Attempt For Pending Schools:</label>
+                <input type="date" id="next" name="next" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">Form Submitted to DG Office:</label>
+                <Select class="form-control">
+                  <option>Yes</option>
+                  <option>No</option>
+
+                </select>
               </div>
             </div>
           </div>
 
-          <div class="row">
-
-
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="name">Target Start Date:</label>
-                <input type="date" id="tsdate" name="tsdate" class="form-control">
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="email">Target End Date:</label>
-                <input type="date" id="tedate" name="tedate" class="form-control">
-              </div>
-            </div>
-
-          </div>
-        </div>
-
+          <input type="submit" value="Submit" class="btn">
       </form>
-<?php
-            } else {
-                echo "User not found.";
-            }
-        } else {
-            echo "Invalid user ID.";
-        }
 
-        $con->close();
-        ?>
     </div>
 
   </section>
