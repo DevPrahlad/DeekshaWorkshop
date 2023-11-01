@@ -74,7 +74,7 @@ body {
   <!-- partial:index.partial.html -->
   <div class="container mt-2">
     <form action="" method="post" enctype="multipart/form-data">
-      <div class="row jumbotron box8">
+      <div class="row jumbotron box8" style="background-color: hsla(244, 16%, 92%, 0.6);">
         <div class="col-sm-12 mx-t4 mb-4">
           <?php
           if (isset($message)) {
