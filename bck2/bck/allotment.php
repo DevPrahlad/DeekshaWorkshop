@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
-<!-- Website - www.codingnepalweb.com -->
-<html lang="en" dir="ltr">
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -11,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     .form-group {
       margin: 15px;
@@ -22,18 +21,15 @@
       font-weight: 600;
       color: #333;
       margin: 15px;
-      align-items: center;
     }
-
-
 
     .head::before {
       content: "";
-      position: relative;
+      position: absolute;
       left: 0;
       bottom: -2px;
       height: 3px;
-      width: 50px;
+      width: 147px;
       border-radius: 8px;
       background-color: #4070f4;
     }
@@ -76,27 +72,32 @@
       <span class="logo_name" style="margin-left:4px">DEEKSHA</span>
     </div>
     <ul class="nav-links">
-
-      <li>
-        <a href="faculty_panel.php" class="active">
+    <li>
+        <a href="admin.php" >
           <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Faculty Panel</span>
+          <span class="links_name">Admin Dasboard</span>
         </a>
       </li>
-
       <li>
-        <a href="user_data_fill.php">
+        <a href="admin_data_report.php">
           <i class='bx bx-book-alt'></i>
-          <span class="links_name">Finished Task</span>
+          <span class="links_name">Data Report</span>
         </a>
       </li>
       <li>
-        <a href="pending.php">
+        <a href="allotment.php" class="active" >
           <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Pending Tasks</span>
+          <span class="links_name">Allotment</span>
         </a>
       </li>
-
+     
+     
+      <li>
+        <a href="search-vehicle.php">
+          <i class='bx bx-search'></i>
+          <span class="links_name">Search</span>
+        </a>
+      </li>
       <li class="log_out">
         <a href="logout.php">
           <i class='bx bx-log-out bx-fade-left-hover'></i>
@@ -109,18 +110,18 @@
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Faculty Panel</span>
+        <span class="dashboard">Deeksha Workshop Details</span>
       </div>
     </nav>
 
     <div class="home-content">
-<?php
+	 <?php
         include 'database.php'; // Include the database connection
 
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             // Query to fetch a specific user's data
-            $sql = "SELECT * FROM faculty_data WHERE id = $id";
+            $sql = "SELECT * FROM usersss WHERE id = $id";
             $result = $con->query($sql);
 
             if ($result->num_rows == 1) {
@@ -128,31 +129,15 @@
         ?>
       <form>
         <div class="form-group">
-
+          <label for="photo">Choose Faculty Photo:</label>
+          <input type="file" id="photo" name="photo" class="form-control-file" style="width: auto;">
           <div id="photo-preview"></div>
 
 
           <div class="row">
-
             <div class="col-md-3">
               <div class="form-group">
-                <label for="name">Faculty Name:</label>
-                <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" class="form-control">
-              </div>
-            </div>
-
-
-
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="name">Department:</label>
-               <input type="text" id="department" name="department" value="<?php echo $row['target']; ?>"class="form-control">
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="name">Alloted Schools:</label>
+                <label for="name">Faculty Stream:</label>
                 <Select class="form-control">
                   <option>---</option>
                   <option>---</option>
@@ -160,16 +145,49 @@
                 </select>
               </div>
             </div>
+
             <div class="col-md-3">
               <div class="form-group">
-                <label for="name">Target:</label>
-                <input type="text" id="target" name="target" value="<?php echo $id; ?>"class="form-control">
+                <label for="name">Faculty Name:</label>
+                <Select class="form-control">
+                  <option>---</option>
+                  <option>---</option>
+                  <option>---</option>
+                </select>
               </div>
             </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">College Region:</label>
+                <Select class="form-control">
+                  <option>---</option>
+                  <option>---</option>
+                  <option>---</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">College Name:</label>
+                <Select class="form-control">
+                  <option>---</option>
+                  <option>---</option>
+                  <option>---</option>
+                </select>
+              </div>
+            </div>
+
           </div>
 
           <div class="row">
-
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">Target:</label>
+                <input type="text" id="target" name="target" class="form-control">
+              </div>
+            </div>
 
             <div class="col-md-3">
               <div class="form-group">
@@ -187,9 +205,10 @@
 
           </div>
         </div>
-
+        <input type="submit" value="Submit" class="btn">
       </form>
-<?php
+
+        <?php
             } else {
                 echo "User not found.";
             }
@@ -214,7 +233,19 @@
     }
   </script>
 
-  <script src="script.js"></script>
+  <script>
+    document.getElementById('photo').addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        var imgSrc = e.target.result;
+        document.getElementById('photo-preview').innerHTML = '<img src="' + imgSrc + '" width="200" height="200">';
+      }
+
+      reader.readAsDataURL(file);
+    });
+  </script>
 </body>
 
 </html>

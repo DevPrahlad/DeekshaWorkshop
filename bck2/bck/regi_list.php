@@ -56,7 +56,7 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">User ID: <?php echo $row["id"]; ?></h5>
-                <p class="card-text">Name: <?php echo $row["name"]; ?></p>
+                <p class="card-text">Username: <?php echo $row["username"]; ?></p>
                 <p class="card-text">Department: <?php echo $row["department"]; ?></p>
                 <a href="allotment.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">allotment</a>
             </div>
@@ -80,9 +80,9 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">User ID: <?php echo $row["id"]; ?></h5>
-                <p class="card-text">Name: <?php echo $row["name"]; ?></p>
+                <p class="card-text">Username: <?php echo $row["username"]; ?></p>
                 <p class="card-text">Department: <?php echo $row["department"]; ?></p>
-                <a href="allotment.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">allotment</a>
+                <a href="allotment.php?id=<?php echo $row["id"]; ?>" class="btn btn-primary">View Profile</a>
             </div>
         </div>
         <?php

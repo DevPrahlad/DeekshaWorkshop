@@ -1,4 +1,32 @@
+<?php
+session_start();
+include('database.php');
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+    header("Location: index.php"); // Redirect to login page if not logged in or not a user
+    exit();
+}
+$userID = $_SESSION['id'];
 
+// Query to retrieve user-specific data from the faculty_data table
+$sql = "SELECT * FROM faculty_data WHERE user_id = ?";
+$stmt = $con->prepare($sql);
+$stmt->bind_param("i", $userID);
+
+if ($stmt->execute()) {
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        // Display the user-specific data here
+    } else {
+        echo "No data found for this user.";
+    }
+} else {
+    echo "Error: " . $stmt->error;
+}
+
+$stmt->close();
+$con->close();
+?>
 <!DOCTYPE html>
 <!-- Website - www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
@@ -114,18 +142,7 @@
     </nav>
 
     <div class="home-content">
-<?php
-        include 'database.php'; // Include the database connection
 
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            // Query to fetch a specific user's data
-            $sql = "SELECT * FROM faculty_data WHERE id = $id";
-            $result = $con->query($sql);
-
-            if ($result->num_rows == 1) {
-                $row = $result->fetch_assoc();
-        ?>
       <form>
         <div class="form-group">
 
@@ -163,7 +180,7 @@
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Target:</label>
-                <input type="text" id="target" name="target" value="<?php echo $id; ?>"class="form-control">
+                <input type="text" id="target" name="target" value="<?php echo $userID; ?>"class="form-control">
               </div>
             </div>
           </div>
@@ -189,16 +206,7 @@
         </div>
 
       </form>
-<?php
-            } else {
-                echo "User not found.";
-            }
-        } else {
-            echo "Invalid user ID.";
-        }
 
-        $con->close();
-        ?>
     </div>
 
   </section>
