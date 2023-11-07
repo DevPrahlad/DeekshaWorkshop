@@ -1,42 +1,3 @@
-<?php
-// Include the database connection
-include 'database.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the user ID from the form
-    $loggedInUserId = $_POST['user_id'];
-
-    // Get the rest of the form data
-     // Temporary path to uploaded photo
-    $department = $_POST['facstream'];
-    $name = $_POST['facname'];
-    $regionId = $_POST['region'];
-    $schools = implode(', ', $_POST['schools']);
-    $target = $_POST['target'];
-    $tsdate = $_POST['tsdate'];
-    $tedate = $_POST['tedate'];
-
-    // Move the uploaded photo to a permanent location
-   
-    // Insert the form data into the MySQL table, including the user ID
-    $sql = "INSERT INTO faculty_data (user_id,department, name, region_id, schools, target, tsdate, tedate)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("issisiss", $loggedInUserId, $department, $name, $regionId, $schools, $target, $tsdate, $tedate);
-
-    if ($stmt->execute()) {
-        echo "Data inserted successfully.";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-    $con->close();
-} else {
-    echo "Invalid request method.";
-}
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -378,3 +339,43 @@ function updateTarget() {
 </body>
 
 </html>
+<?php
+// Include the database connection
+include 'database.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the user ID from the form
+    $loggedInUserId = $_POST['user_id'];
+
+    // Get the rest of the form data
+     // Temporary path to uploaded photo
+    $department = $_POST['facstream'];
+    $name = $_POST['facname'];
+    $regionId = $_POST['region'];
+    $schools = implode(', ', $_POST['schools']);
+    $target = $_POST['target'];
+    $tsdate = $_POST['tsdate'];
+    $tedate = $_POST['tedate'];
+
+    // Move the uploaded photo to a permanent location
+   
+    // Insert the form data into the MySQL table, including the user ID
+    $sql = "INSERT INTO faculty_data (user_id,department, name, region_id, schools, target, tsdate, tedate)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("issisiss", $loggedInUserId, $department, $name, $regionId, $schools, $target, $tsdate, $tedate);
+
+    if ($stmt->execute()) {
+		echo "<script>
+alert('Allotment Successfully Added');
+</script>";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $con->close();
+} else {
+    echo "Invalid request method.";
+}
+?>

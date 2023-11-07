@@ -5,7 +5,7 @@ if (isset($_SESSION['role'])) {
     if ($_SESSION['role'] === 'admin') {
         header("Location: admin.php");
     } elseif ($_SESSION['role'] === 'user') {
-        header("Location: faculty_panel.php");
+        header("Location: dummy.php");
     }
     exit();
 }
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->num_rows > 0) {
         // Successful login
 		$_SESSION['id'] = $dbUserId;
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $dbUsername;
         $_SESSION['role'] = $dbRole;
         if ($dbRole === 'admin') {
             header("Location: admin.php");

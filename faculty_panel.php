@@ -1,4 +1,48 @@
+  <?php
+    session_start();
+    include('database.php');
 
+    if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+        header("Location: index.php"); // Redirect to login page if not logged in or not a user
+        exit();
+    }
+
+    $userID = $_SESSION['id'];
+	
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Handle form submission and database insertion
+    $user_id = $_SESSION['id'];
+    $name = $_POST['name'];
+    $department = $_POST['department'];
+    $target = $_POST['target'];
+    $tsdate = $_POST['tsdate'];
+    $tedate = $_POST['tedate'];
+    $schools = implode(', ', $_POST['schools']);
+    $date = $_POST['date'];
+    $pname = $_POST['pname'];
+    $pcont = $_POST['pcont'];
+    $tgtname = $_POST['tgtname'];
+    $tgtcont = $_POST['tgtcont'];
+    $pgtname = $_POST['pgtname'];
+    $pgtcont = $_POST['pgtcont'];
+    $school_status = $_POST['school_status'];
+    $ten = $_POST['ten'];
+    $twelve = $_POST['twelve'];
+    $topic_covered = $_POST['topic_covered'];
+    $visit_remark = $_POST['visit_remark'];
+    $data_collected = $_POST['data_collected'];
+
+    // Insert data into the database
+    $sql = "INSERT INTO faculty_fill_data (user_id, name, department, target, tsdate, tedate, schools, date, pname, pcont, tgtname, tgtcont, pgtname, pgtcont, school_status, ten, twelve, topic_covered, visit_remark, data_collected) VALUES ('$user_id', '$name', '$department', '$target', '$tsdate', '$tedate', '$schools', '$date', '$pname', '$pcont', '$tgtname', '$tgtcont', '$pgtname', '$pgtcont', '$school_status', '$ten', '$twelve', '$topic_covered', '$visit_remark', '$data_collected')";
+
+    if ($con->query($sql) === TRUE) {
+         echo "<script>alert('Data Successfully Added.');</script>";
+    } else {
+        echo "Error: " . $con->error;
+    }
+    $con->close();
+}
+	?>
 <!DOCTYPE html>
 <!-- Website - www.codingnepalweb.com -->
 <html lang="en" dir="ltr">
@@ -85,7 +129,7 @@
       </li>
 
       <li>
-        <a href="user_data_fill.php">
+        <a href="dummy2.php">
           <i class='bx bx-book-alt'></i>
           <span class="links_name">Finished Task</span>
         </a>
@@ -126,70 +170,190 @@
             if ($result->num_rows == 1) {
                 $row = $result->fetch_assoc();
         ?>
-      <form>
+      <form method="POST" action="">
         <div class="form-group">
 
-          <div id="photo-preview"></div>
-
-
           <div class="row">
+		  
+		  <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">User Id:</label>
+                <input type="text" id="name" name="id" value="<?php echo $row["user_id"]; ?>" class="form-control" readonly>
+              </div>
+            </div>
 
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Faculty Name:</label>
-                <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" class="form-control">
-              </div>
+                <input type="text" id="name" name="name" value="<?php echo $row["name"]; ?>" class="form-control" readonly>
+              </div> 
             </div>
 
-
+            
 
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Department:</label>
-               <input type="text" id="department" name="department" value="<?php echo $row['target']; ?>"class="form-control">
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="form-group">
-                <label for="name">Alloted Schools:</label>
-                <Select class="form-control">
-                  <option>---</option>
-                  <option>---</option>
-                  <option>---</option>
-                </select>
+               <input type="text" id="department" name="department" value="<?php echo $row['department']; ?>"class="form-control" readonly>
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Target:</label>
-                <input type="text" id="target" name="target" value="<?php echo $id; ?>"class="form-control">
+                <input type="text" id="target" name="target" value="<?php echo $row['target']; ?>"class="form-control" readonly>
               </div>
             </div>
-          </div>
-
-          <div class="row">
-
-
-            <div class="col-md-3">
+			  <div class="col-md-3">
               <div class="form-group">
                 <label for="name">Target Start Date:</label>
-                <input type="date" id="tsdate" name="tsdate" class="form-control">
+                <input type="text" id="tsdate" value="<?php echo $row['tsdate']; ?> "name="tsdate" class="form-control" readonly>
               </div>
             </div>
 
             <div class="col-md-3">
               <div class="form-group">
                 <label for="email">Target End Date:</label>
-                <input type="date" id="tedate" name="tedate" class="form-control">
+                <input type="text" id="tedate" name="tedate" value="<?php echo $row['tedate']; ?>" class="form-control"readonly>
               </div>
             </div>
 
+			
+          </div>
+
+          <div class="row">
+
+ <div class="col-md-6">
+              <div class="form-group">
+                <label for="alloted"> Select one of Alloted Schools:</label>
+                <Select name="schools[]" multiple class="form-control">
+ <?php
+                      // Query to fetch the list of alloted schools
+                      $allotedSql = "SELECT schools FROM faculty_data WHERE id = $id";
+                      $allotedResult = $con->query($allotedSql);
+                      if ($allotedResult->num_rows == 1) {
+                        $allotedRow = $allotedResult->fetch_assoc();
+                        $allotedSchools = explode(',', $allotedRow['schools']);
+                        foreach ($allotedSchools as $school) {
+                          $school = trim($school);
+                          echo '<option value="' . $school . '">' . $school . '</option>';
+                        }
+                      } else {
+                        echo '<option value="">No alloted schools</option>';
+                      }
+                      ?>
+                </select>
+              </div>
+            </div>
+			
+			            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">Date:</label>
+                <input type="date" id="date" name="date" class="form-control">
+              </div>
+            </div>
+
+           
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">Principal Name:</label>
+                <input type="text" id="pname" name="pname" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">Principal's Contact No.:</label>
+                <input type="text" id="pcont" name="pcont" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">TGT Teacher Name:</label>
+                <input type="text" id="tgtname" name="tgtname" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">TGT Teacher's Contact No.:</label>
+                <input type="text" id="tgtcont" name="tgtcont" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">PGT Teacher Name:</label>
+                <input type="text" id="pgtname" name="pgtname" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">PGT Teacher's Contact No.:</label>
+                <input type="text" id="pgtcont" name="pgtcont" class="form-control">
+              </div>
+            </div>
+
+
+       
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">School Status:</label>
+                <Select name="school_status" class="form-control">
+                    <option value="U.P. BOARD">U.P. BOARD</option>
+            <option value="CBSE Board">CBSE Board</option>
+            <option value="ICSE Board">ICSE Board</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">No. Of 10th Students:</label>
+                <input type="text" id="ten" name="ten" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">No. Of 12th Students:</label>
+                <input type="text" id="twelve" name="twelve" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">Topic Covered:</label>
+                <input type="text" id="topic" name="topic_covered" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">Visit Remarks:</label>
+                <input type="text" id="visistremark" name="visit_remark" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="name">Data Collected:</label>
+                <Select name="data_collected" class="form-control">
+                    <option value="Yes">Yes</option>
+            <option value="No">No</option>
+                </select>
+              </div>
+            </div>
+
+
+          
           </div>
         </div>
-
+ <input type="submit" value="Submit" class="btn">
       </form>
-<?php
+    <?php 
             } else {
                 echo "User not found.";
             }

@@ -2,8 +2,8 @@
 session_start();
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-  header("Location: index.php"); // Redirect to login page if not logged in or not an admin
-  exit();
+    header("Location: index.php"); // Redirect to login page if not logged in or not an admin
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -14,8 +14,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
   <link rel="stylesheet" href="style1.css">
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" type="text/css"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
@@ -46,12 +45,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
           <span class="links_name">Allotment</span>
         </a>
       </li>
-      <li>
-        <a href="adduser.php">
-          <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Add User</span>
-        </a>
-      </li>
+
 
       <li>
         <a href="search-vehicle.php">
@@ -75,9 +69,9 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
       </div>
     </nav>
 
-  <div class="home-content">
+    <div class="home-content"></div>
     <div>
-      <h2>Graph Of Task Completed by faculty</h2>
+      <h2>Graph Of Task Complited by faculty</h2>
     </div>
     <div>
       <h2>graph of Task Panding by Faculty</h2>
@@ -88,27 +82,18 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     <div>
       college Panding
     </div>
-      <div style="display:grid; place-items:center;">
-              <label for="">Total Data Colleted</label>
-              <input type="text" name="" id="DataCollected">
-          
+    <div>
+      total data Colleted
+      <div>
+        Up
       </div>
-      
-      <div style="display:flex;justify-content; ">
-            <div>
-              <label for="">Up Board</label>
-              <input type="text" name="" id="up_Board">
-            </div>
-            <div>
-              <label for="">CBSC</label>
-              <input type="text" name="" id="CBSC">
-            </div>
-            <div>
-              <label for="">ISCE</label>
-              <input type="text" name="" id="ISCE">
-            </div>
+      <div>
+        CBSE
       </div>
-    
+      <div>
+        ICSE
+      </div>
+    </div>
     <div>
       <h2>Deprtment wise School students Segregation</h2>
     </div>
@@ -117,17 +102,15 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
       time Series Analysi
     </div>
 
-  
+    <a class="nav-link" href="logout.php"><?php echo ucwords($_SESSION['username']); ?></a>
 
-    
-  </div>
-    
+    </div>
 
   </section>
   <script>
     let sidebar = document.querySelector(".sidebar");
     let sidebarBtn = document.querySelector(".sidebarBtn");
-    sidebarBtn.onclick = function () {
+    sidebarBtn.onclick = function() {
       sidebar.classList.toggle("active");
       if (sidebar.classList.contains("active")) {
         sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
