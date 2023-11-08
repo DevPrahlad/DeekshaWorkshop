@@ -96,6 +96,12 @@
                         <p>Region:
                             <?php echo $row["region_name"]; ?>
                         </p>
+						<p>Start Date:
+                            <?php echo $row["tsdate"]; ?>
+                        </p>
+						<p>End Date:
+                            <?php echo $row["tedate"]; ?>
+                        </p>
                         <!-- Add more data fields as required -->
                     </div>
                     <div>
