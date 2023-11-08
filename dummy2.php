@@ -33,6 +33,7 @@ $result = $con->query($sql);
             echo "<h2>Faculty Name: " . $row["tgtname"] . "</h2>";
             echo "<p>Department: " . $row["tgtcont"] . "</p>";
 			echo "<p>Department: " . $row["pname"] . "</p>";
+			echo "<p>Department: " . $row["date"] . "</p>";
             // Add other data fields here...
 
             // You can also add an edit or delete link for each card
