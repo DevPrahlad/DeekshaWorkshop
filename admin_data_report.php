@@ -6,7 +6,8 @@
   <link rel="stylesheet" href="style1.css">
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -71,8 +72,8 @@
       <span class="logo_name" style="margin-left:4px">DEEKSHA</span>
     </div>
     <ul class="nav-links">
-    <li>
-        <a href="admin.php" >
+      <li>
+        <a href="admin.php">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Admin Dasboard</span>
         </a>
@@ -84,18 +85,12 @@
         </a>
       </li>
       <li>
-        <a href="allotment.php" >
+        <a href="allotment.php">
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Allotment</span>
         </a>
       </li>
-     
-      <li>
-        <a href="search-vehicle.php">
-          <i class='bx bx-search'></i>
-          <span class="links_name">Search</span>
-        </a>
-      </li>
+
       <li class="log_out">
         <a href="logout.php">
           <i class='bx bx-log-out bx-fade-left-hover'></i>
@@ -245,7 +240,7 @@
   <script>
     let sidebar = document.querySelector(".sidebar");
     let sidebarBtn = document.querySelector(".sidebarBtn");
-    sidebarBtn.onclick = function() {
+    sidebarBtn.onclick = function () {
       sidebar.classList.toggle("active");
       if (sidebar.classList.contains("active")) {
         sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");

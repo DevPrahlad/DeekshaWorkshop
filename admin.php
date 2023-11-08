@@ -2,8 +2,8 @@
 session_start();
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: index.php"); // Redirect to login page if not logged in or not an admin
-    exit();
+  header("Location: index.php"); // Redirect to login page if not logged in or not an admin
+  exit();
 }
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,8 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
   <link rel="stylesheet" href="style1.css">
   <!-- Boxicons CDN Link -->
   <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
@@ -46,13 +47,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
         </a>
       </li>
 
-
-      <li>
-        <a href="search-vehicle.php">
-          <i class='bx bx-search'></i>
-          <span class="links_name">Search</span>
-        </a>
-      </li>
       <li class="log_out">
         <a href="logout.php">
           <i class='bx bx-log-out bx-fade-left-hover'></i>
@@ -102,7 +96,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
       time Series Analysi
     </div>
 
-    <a class="nav-link" href="logout.php"><?php echo ucwords($_SESSION['username']); ?></a>
+
 
     </div>
 
@@ -110,7 +104,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
   <script>
     let sidebar = document.querySelector(".sidebar");
     let sidebarBtn = document.querySelector(".sidebarBtn");
-    sidebarBtn.onclick = function() {
+    sidebarBtn.onclick = function () {
       sidebar.classList.toggle("active");
       if (sidebar.classList.contains("active")) {
         sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");

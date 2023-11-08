@@ -415,11 +415,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="login__check">
                         <div>
-                            <input type="radio" name="role" value="admin" checked>
+                            <input type="radio" name="role" value="admin" >
                             <label for="input-check" class="login__check-label">Admin</label>
                         </div>
                         <div>
-                            <input type="radio" name="role" value="user">
+                            <input type="radio" name="role" value="user" checked>
 
                             <label for="input-check" class="login__check-label">User</label>
                         </div>

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Favicon -->
     <link id='favicon' rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-png">
-    <title>Portfolio | Jigar Sable</title>
+    <title>Deeksha Workshop</title>
 </head>
 <body oncontextmenu="return false">
 
@@ -22,7 +22,7 @@
 </div> -->
 
 <!-- navbar starts -->
-<header style="width:100%">
+<header>
       <marquee 
       loop="alternet"  scrollamount=10 behavior="scroll" direction="left"><p>ॐ भूर् भुवः स्वः। &nbsp;&nbsp;&nbsp;  तत् सवितुर्वरेण्यं। &nbsp;&nbsp;&nbsp;  भर्गो देवस्य धीमहि। &nbsp;&nbsp;&nbsp;  धियो यो नः प्रचोदयात् ॥</p></marquee>
 </header>

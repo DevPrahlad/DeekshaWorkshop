@@ -69,7 +69,7 @@ header {
   align-items: center;
   justify-content: center;
   height: 6.5rem;
-  background-color: #fff;
+  background-color: #FF0800;
   box-shadow: 0 1px 4px rgba(146, 161, 176, 0.3);
 }
 section {
@@ -108,7 +108,7 @@ header .navbar li {
 }
 header .navbar ul li a {
   font-size: 1.57rem;
-  color: #0e2431;
+  color: #FF0800;
   font-weight: 600;
   text-decoration: none;
   letter-spacing: 0.04rem;
@@ -116,7 +116,7 @@ header .navbar ul li a {
 }
 header .navbar ul li a.active,
 header .navbar ul li a:hover {
-  color: #011aff;
+  /* color: #011aff; */
   border-bottom: 0.2rem solid #011aff;
   padding: 0.5rem 0;
 }
@@ -124,11 +124,14 @@ marquee{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:2rem; 
-  background: rgb(34,193,195);
-background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,215,133,1) 100%);
+  font-size:3rem; 
+  color:#FFFFFF;
+  background: #FF0800;
   width:100%; 
   height: 100%; 
+}
+marquee p{
+  font-weight:500px;
 }
 /* navbar ends */
 
@@ -140,6 +143,7 @@ background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,215,133,1) 100
   gap: 1.5rem;
   min-height: 100vh;
   align-items: center;
+  background-color:#FFFFFF
 }
 
 .home::before {
